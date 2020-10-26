@@ -1,0 +1,46 @@
+<div class="row mb-4">
+    <div class="col-md-6">
+        <h2>Patients</h2>
+    </div>
+    <div class="col-md-6">  
+    </div>
+</div>
+<div class="row">
+    <div class="col-2">
+        <!-- New Patient Button -->
+        <a routerLink="/patient/new" class="btn btn-primary btn-block mb-4">
+            <i class="fa fa-plus"></i> New Patient
+        </a>
+    </div> 
+</div>
+<!-- Patients table -->
+<table *ngIf="patients?.length > 0; else noPatients" class="table table-hover table-bordered">
+    <thead class="thead-light">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Dynamically populate the table by looping through the patients array returned from Firestore -->
+        <tr *ngFor="let patient of patients">
+            <td>{{ patient.fName }} {{ patient.lName }}</td>
+            <td>{{ patient.email }}</td>
+            <td>{{ patient.phone }}</td>
+            <td class="text-center">
+                <!-- The Details button to open the patient-details component -->
+                <a routerLink="patient/{{ patient.patientId }}" class="btn btn-secondary btn-sm">
+                    Details
+                    <i class="fa fa-arrow-circle-o-right ml-1"></i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!-- Here if the patients array is empty -->
+<ng-template #noPatients>
+    <hr>
+    <h5>There are no patients to display</h5>
+</ng-template>

@@ -1,0 +1,54 @@
+<!-- Button to return to dashboard -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <a href="btn btn-link" routerLink="/">
+            Back to dashboard
+        </a>
+    </div>
+</div>
+<!-- The table holding the patient details -->
+<div *ngIf="patient" class="card mb-4">
+    <h4 class="card-header">
+        Patient Information
+    </h4>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <p>Name: {{ patient.fName }} {{ patient.lName }}</p>
+                <p>Patient ID: {{ patient.patientId }}</p>
+                <p>Email Address: {{ patient.email }}</p>
+                <p>Phone Number: {{ patient.phone }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<h4 class="mb-4">Registered Wounds</h4>
+<!-- The table holding the patient wounds -->
+<table *ngIf="wounds?.length > 0; else noWounds" class="table table-hover">
+    <thead class="thead thead-light">
+        <tr>
+            <th>Limb</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Populate the table by looping through the Wound array retured for this patient -->
+        <tr *ngFor="let wound of wounds">
+            <!-- If the wound is in danger, place a red icon next to the name -->
+            <td><i *ngIf="wound.woundInDanger" class="fa fa-exclamation-circle"></i> {{ wound.limbName }} </td>
+            <td>
+                <a routerLink="wound/{{ wound.woundId }}" class="btn btn-secondary btn-sm">
+                    Details
+                    <i class="fa fa-arrow-circle-o-right ml-1"></i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- This is displayed if the patient has yet to register a wound on the system -->
+<ng-template #noWounds>
+    <hr>
+    <h5>This patient has no wounds registered on the system</h5>
+</ng-template>

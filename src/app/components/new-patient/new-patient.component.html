@@ -1,0 +1,39 @@
+<!-- Button to return to dashboard -->
+<div class="row mb-3">
+    <a routerLink="/" class="btn btn-link">
+        Back to dashboard
+    </a>
+</div>
+<div class="card">
+    <div class="card-header">
+        Verifiy a New Patient
+    </div>
+    <div class="card-body">
+        <!-- Patient email form -->
+        <form #verificationForm="ngForm" (ngSubmit)="onSubmit(verificationForm)">
+            <div class="form-group">
+                <label for="patientEmail">Patient Email</label>
+                <input 
+                    type="text"
+                    class="form-control"
+                    name="patientEmail"
+                    #patientEmail="ngModel"
+                    [ngClass]="{'is-invalid': patientEmail.errors && patientEmail.touched}"
+                    [(ngModel)] = "patientToVerify.patientEmail"
+                    pattern="^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$"
+                    required
+                >
+                <!-- Here if form field left empty -->
+                <div [hidden]="!patientEmail.errors?.required" class="invalid-feedback">
+                    Email address required
+                </div>
+                <!-- Here if the email address submitted was in an unrecognised format -->
+                <div [hidden]="!patientEmail.errors?.pattern" class="invalid-feedback">
+                    Please enter a valid email address 
+                </div>
+            </div>
+
+            <input type="submit" value="Send Verification Code" class="btn btn-primary btn-block">
+        </form>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+<nav class="navbar navbar-expand-md navbar-light mb-4" style="background-color: #e3f2fd;">
+    <div class="container">
+        <a routerLink="/" class="navbar-brand">WoundDoctor Clinician Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav ml-auto">
+                <li *ngIf="isUserLoggedIn" class="nav-item">
+                    <a href="#" (click)="onLogout()" class="nav-link">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

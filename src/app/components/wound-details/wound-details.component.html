@@ -1,0 +1,42 @@
+<!-- Button to return to the patient details page -->
+<div class="row mb-4">
+    <div class="col-md-6">
+        <a href="btn btn-link" routerLink="/patient/{{ wound.userId }}">
+            Back to patient
+        </a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-7">
+        <!-- The wound information section -->
+        <div *ngIf="wound" class="card mb-4">
+            <h4 class="card-header">
+                <!-- Red icon is displayed if wound is in danger -->
+                <i *ngIf="isInDanger" class="fa fa-exclamation-circle"></i> Wound Information
+            </h4>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Wound ID: {{ wound.woundId }}</p>
+                        <p>Wound Location: {{ wound.limbName }}</p>
+                        <p>Patient ID: {{ wound.userId }}</p>
+                        <p>Registered On: {{ wound.date.seconds * 1000 | date:'dd/MM/yyyy' }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- The chart displaying the wounds condition -->
+        <div class="row" id="divChart">
+            <canvas id="chart"></canvas>
+        </div>
+    </div>
+    <!-- The last image of the wound retrieved from the latest feeback taken by the patient -->
+    <div class="col-md-5">
+        <a href="{{latestFeedback.imageUrl}}">
+            <img src="{{latestFeedback.imageUrl}}" class="img-fluid">
+        </a>
+    </div>
+</div>
+
+
+
